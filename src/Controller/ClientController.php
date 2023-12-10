@@ -20,7 +20,7 @@ class ClientController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    #[Route('/', name: 'getListClient', methods: 'get')]
+    #[Route('/list', name: 'getListClient', methods: 'get')]
     public function index(ClientRepository $repos): JsonResponse
     {   
         $list = $repos->findAll();

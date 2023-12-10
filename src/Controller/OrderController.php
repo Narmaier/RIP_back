@@ -94,12 +94,11 @@ class OrderController extends AbstractController
     public function delete($id, OrderRepository $repos): JsonResponse
     {   
         $order = $repos->find($id);
+        $jdata = $this->serializer->serialize($order, 'json');
         $order->getSeller()->removeSale($order);
         $order->getClient()->removeOrder($order);
         $order->getAuto()->removeOrder($order);
         $repos->deleteFromRep($order);
-        
-        $jdata = $this->serializer->serialize($order, 'json');
         return new JsonResponse($jdata, 200, [], true);
     }
 }
